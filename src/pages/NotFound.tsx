@@ -1,4 +1,7 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
+import { ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
 
 const NotFound = () => {
@@ -9,14 +12,28 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">404</h1>
-        <p className="mb-4 text-xl text-muted-foreground">Oops! Page not found</p>
-        <a href="/" className="text-primary underline hover:text-primary/90">
-          Return to Home
-        </a>
-      </div>
+    <div className="min-h-screen bg-background flex items-center justify-center">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-center px-6"
+      >
+        <span className="label-text mb-4 block">404 Error</span>
+        <h1 className="heading-display mb-6">
+          Page not{" "}
+          <span className="text-primary">found</span>
+        </h1>
+        <p className="body-large max-w-md mx-auto mb-10">
+          The page you're looking for doesn't exist or has been moved.
+        </p>
+        <Link to="/">
+          <Button variant="hero" size="lg" className="group">
+            <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
+            Back to Home
+          </Button>
+        </Link>
+      </motion.div>
     </div>
   );
 };
